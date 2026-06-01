@@ -1,0 +1,17 @@
+@import "tailwindcss";
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  @apply bg-slate-950;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-800 rounded-full hover:bg-cyan-900;
+}
+
+body {
+  margin: 0;
+  @apply bg-slate-950 text-slate-100 antialiased;
+  display: block; 
+}

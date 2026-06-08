@@ -27,7 +27,7 @@ const Toast = ({ message, type, onClose }) => {
           }`}
         >
           {/* Status Icon */}
-          <span className="flex-shrink-0">
+          <span className="shrink-0">
             {type === 'error' ? '⚠️' : '✅'}
           </span>
           

@@ -23,6 +23,8 @@ function App() {
   const location = useLocation();
   const currentPath = location.pathname.replace('/', '') || 'overview';
 
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080';
+
   useEffect(() => {
     if (currentPath !== 'overview') {
       fetchData();
@@ -32,10 +34,10 @@ function App() {
   const fetchData = async () => {
     setLoading(true);
     try {
-      const response = await axios.get(`http://localhost:8080/api/space/${currentPath}/all`);
+      const response = await axios.get(`${API_BASE_URL}/api/space/${currentPath}/all`);
       setData(response.data);
     } catch (error) {
-      console.error("Connection Error:", error);
+      console.error("🌌 Telemetry Connection Error:", error);
     } finally {
       setLoading(false);
     }
@@ -45,10 +47,10 @@ function App() {
     if (currentPath === 'overview') return;
     setSyncing(true);
     try {
-      await axios.get(`http://localhost:8080/api/space/${currentPath}/fetch`);
-      fetchData(); 
+      await axios.get(`${API_BASE_URL}/api/space/${currentPath}/fetch`);
+      await fetchData(); 
     } catch (error) {
-      alert("Sync failed. Check if Backend is running.");
+      console.error("📡 Synchronization Uplink Failed:", error);
     } finally {
       setSyncing(false);
     }
@@ -62,18 +64,15 @@ function App() {
 
   return (
     <div className="relative w-full min-h-screen text-white overflow-x-hidden bg-black font-sans">
-      
       <BackgroundMatrix />
 
       <div className="relative z-10 p-6 md:p-8 pt-4 min-h-screen pb-32 max-w-7xl mx-auto">
-        
         <Header view={currentPath} loading={loading} syncing={syncing} handleSync={handleSync} />
         <Navigation currentPath={currentPath} />
 
         <section className="relative">
           <AnimatePresence mode="wait">
             <Routes location={location} key={location.pathname}>
-              
               <Route path="/" element={<Navigate to="/overview" replace />} />
               
               <Route path="/overview" element={
@@ -93,11 +92,9 @@ function App() {
                   <TelemetryTable data={data} view="ligo" />
                 </motion.div>
               } />
-
             </Routes>
           </AnimatePresence>
         </section>
-
       </div>
     </div>
   );

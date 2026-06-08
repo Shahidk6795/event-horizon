@@ -31,10 +31,15 @@ app.get('/api/space/:view/all', (req, res) => {
     res.json(data);
 });
 
-app.get('/api/space/:view/fetch', (req, res) => {
-    setTimeout(() => {
-        res.json({ status: "success", message: "Network sync complete." });
-    }, 1500);
+app.get('/', (req, res) => {
+    res.json({
+        status: "Online",
+        message: "Event Horizon Telemetry Server is active.",
+        endpoints: [
+            "/api/space/asteroids/all",
+            "/api/space/ligo/all"
+        ]
+    });
 });
 
 app.listen(PORT, () => {

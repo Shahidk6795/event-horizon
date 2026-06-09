@@ -21,7 +21,6 @@ const mockData = {
     ]
 };
 
-// Route 1: Used when the page first loads
 app.get('/api/space/:view/all', (req, res) => {
     const { view } = req.params;
     
@@ -31,16 +30,12 @@ app.get('/api/space/:view/all', (req, res) => {
     res.json(data);
 });
 
-// Route 2: THE FIX - Used when you click the "Re-Sync" button
 app.get('/api/space/:view/fetch', (req, res) => {
     const { view } = req.params;
     
-    // Simulating a 1.2 second network delay so you can see your frontend loading states!
     setTimeout(() => {
         console.log(`[SYNC] Frontend requested fresh sync for: ${view}`);
         
-        // In a real app, you would fetch real NASA data here. 
-        // For now, we just send a success signal back to the frontend.
         res.status(200).json({ 
             success: true, 
             message: `Successfully synchronized ${view} telemetry.` 
@@ -48,7 +43,6 @@ app.get('/api/space/:view/fetch', (req, res) => {
     }, 1200); 
 });
 
-// Route 3: Base health check
 app.get('/', (req, res) => {
     res.json({
         status: "Online",

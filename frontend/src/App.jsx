@@ -15,7 +15,7 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [syncing, setSyncing] = useState(false);
 
-  const [toast, setToast] = useState({ message: '', type: '' }); 
+  const [toast, setToast] = useState({ message: '', type: '' });
 
   const [activeScan, setActiveScan] = useState({
     title: "Sector 7-Gamma Check",

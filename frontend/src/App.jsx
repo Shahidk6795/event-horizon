@@ -14,7 +14,7 @@ function App() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [syncing, setSyncing] = useState(false);
-  
+
   const [toast, setToast] = useState({ message: '', type: '' }); 
 
   const [activeScan, setActiveScan] = useState({

@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const Toast = ({ message, type, onClose }) => {
-  // Automatically close the toast after 4 seconds
   useEffect(() => {
     if (message) {
       const timer = setTimeout(() => {
@@ -26,7 +25,6 @@ const Toast = ({ message, type, onClose }) => {
               : 'bg-emerald-950/40 border-emerald-500/30 text-emerald-200'
           }`}
         >
-          {/* Status Icon */}
           <span className="shrink-0">
             {type === 'error' ? '⚠️' : '✅'}
           </span>
@@ -35,7 +33,6 @@ const Toast = ({ message, type, onClose }) => {
             {message}
           </div>
 
-          {/* Manual Close Button */}
           <button 
             onClick={onClose}
             className="ml-4 text-white/50 hover:text-white transition-colors"

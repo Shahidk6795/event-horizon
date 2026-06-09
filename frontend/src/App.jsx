@@ -8,14 +8,13 @@ import Header from './components/core/Header.jsx';
 import Navigation from './components/core/Navigation.jsx';
 import OverviewTerminal from './components/views/OverviewTerminal.jsx';
 import TelemetryTable from './components/views/TelemetryTable.jsx';
-import Toast from './components/core/Toast.jsx'; // 1. Import the new component
+import Toast from './components/core/Toast.jsx';
 
 function App() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [syncing, setSyncing] = useState(false);
   
-  // 2. Add the Toast state
   const [toast, setToast] = useState({ message: '', type: '' }); 
 
   const [activeScan, setActiveScan] = useState({
@@ -29,7 +28,6 @@ function App() {
   const currentPath = location.pathname.replace('/', '') || 'overview';
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080';
 
-  // Helper function to trigger toasts
   const showToast = (message, type = 'success') => {
     setToast({ message, type });
   };
@@ -46,7 +44,6 @@ function App() {
       const response = await axios.get(`${API_BASE_URL}/api/space/${currentPath}/all`);
       setData(response.data);
     } catch (error) {
-      // 3. Replace console.error with a Toast
       showToast("Telemetry connection failed. Retrying...", "error");
     } finally {
       setLoading(false);
@@ -59,10 +56,8 @@ function App() {
     try {
       await axios.get(`${API_BASE_URL}/api/space/${currentPath}/fetch`);
       await fetchData(); 
-      // 4. Add a success toast
       showToast("Telemetry stream synchronized.", "success");
     } catch (error) {
-      // 5. Replace the alert() with an error Toast
       showToast("Sync failed. Check backend connection.", "error");
     } finally {
       setSyncing(false);
@@ -107,7 +102,6 @@ function App() {
         </section>
       </div>
 
-      {/* 6. Mount the Toast Component at the bottom of the app */}
       <Toast 
         message={toast.message} 
         type={toast.type} 

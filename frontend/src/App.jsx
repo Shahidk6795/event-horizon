@@ -55,7 +55,7 @@ function App() {
     setSyncing(true);
     try {
       await axios.get(`${API_BASE_URL}/api/space/${currentPath}/fetch`);
-      await fetchData(); 
+      await fetchData();
       showToast("Telemetry stream synchronized.", "success");
     } catch (error) {
       showToast("Sync failed. Check backend connection.", "error");
@@ -103,8 +103,8 @@ function App() {
       </div>
 
       <Toast 
-        message={toast.message} 
-        type={toast.type} 
+        message={toast.message}
+        type={toast.type}
         onClose={() => setToast({ message: '', type: '' })} 
       />
     </div>
